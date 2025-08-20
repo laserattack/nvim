@@ -9,6 +9,10 @@ return {
         require("nvim-tree").setup({
             filters = {
                 git_ignored = false,
+                custom = {
+                    -- не показывать директорию .git
+                    ".git$"
+                }
             },
             -- live filter - тот который открывается на f,
             -- закрывается на F
