@@ -46,7 +46,7 @@ return {
                 project = {
                     enable = false,
                 },
-                footer = { "", "Do good stuff!" },
+                footer = { "", "Do cool stuff!" },
             },
         }
     end,
