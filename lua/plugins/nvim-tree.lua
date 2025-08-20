@@ -6,7 +6,8 @@ return {
         { dir = "~/.config/nvim/deps/plugins/nvim-web-devicons" }
     },
     config = function()
-        require("nvim-tree").setup({
+        require("nvim-tree").setup {
+            sync_root_with_cwd = true,
             filters = {
                 git_ignored = false,
                 custom = {
@@ -20,14 +21,15 @@ return {
                 always_show_folders = false,
             },
             renderer = {
-                root_folder_label = false,
+                -- root_folder_label = false,
             },
             view = {
                 cursorline = false,
                 signcolumn = "yes",
             }
-        })
+        }
         local nvt_api = require("nvim-tree.api")
+
         -- При закрытии файла дерево директорий также закрывается
         vim.api.nvim_create_autocmd("QuitPre", {
             callback = function()
@@ -36,6 +38,7 @@ return {
                 end
             end,
         })
+
         -- alt+e - открыть/закрыть меню директорий
         vim.keymap.set("n", "<A-e>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
         -- alt+] - сделать выбранную директорию корневой

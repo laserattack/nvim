@@ -30,3 +30,18 @@ vim.opt.tabstop = 4
 vim.opt.smarttab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+
+-- При открытии nvim (если открывается файл) рабочая директория
+-- меняется на директорию в которой этот файл
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    callback = function(data)
+        local directory = vim.fn.isdirectory(data.file) == 1
+        if not directory then
+            local current_file = vim.api.nvim_buf_get_name(0)
+            if current_file ~= "" then
+                local file_dir = vim.fn.fnamemodify(current_file, ":h")
+                vim.cmd("cd " .. vim.fn.fnameescape(file_dir))
+            end
+        end
+    end,
+})
