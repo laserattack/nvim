@@ -15,13 +15,9 @@ return {
                     ".git$"
                 }
             },
-            -- live filter - тот который открывается на f,
-            -- закрывается на F
+            -- live filter - тот который открывается на f, закрывается на F
             live_filter = {
                 always_show_folders = false,
-            },
-            renderer = {
-                -- root_folder_label = false,
             },
             view = {
                 cursorline = false,
