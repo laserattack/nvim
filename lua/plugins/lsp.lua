@@ -1,10 +1,9 @@
 -- Настройки LSP серверов
 
--- Чтобы добавить LSP-сервер надо в табличку добавить новое поле с его настройками
--- в cmd добавить путь до бинарника LSP-сервера
+-- Чтобы добавить сервер надо в табличку добавить новое поле с его настройками
+-- в cmd добавить путь до бинарника сервера
 
 local ls_settings = {
-    -- lsp сервер для Lua
     lua_ls = {
         cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/lua/bin/lua-language-server') },
         settings = {
@@ -30,11 +29,9 @@ local ls_settings = {
             },
         },
     },
-    -- lsp для Zig
     zls = {
         cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/zls/zls') },
     },
-    -- lsp для C/C++ (clangd)
     clangd = {
         cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/clangd/bin/clangd') },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
