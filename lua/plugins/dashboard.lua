@@ -33,6 +33,7 @@ return {
     event = 'VimEnter',
     config = function()
         vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#7fb4ca' })
+        vim.api.nvim_set_hl(0, 'DashboardMruIcon', { fg = '#7fb4ca' })
         require('dashboard').setup {
             config = {
                 header = headers[2],
@@ -41,7 +42,8 @@ return {
                 },
                 mru = {
                     enable = true,
-                    label = ""
+                    label = "",
+                    icon = "  Recently Files:",
                 },
                 project = {
                     enable = false,
