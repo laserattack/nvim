@@ -18,6 +18,10 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-1>', ':vertical resize -5<CR>', { noremap = true, silent = true })
 -- Увеличение ширины окна
 vim.keymap.set('n', '<A-2>', ':vertical resize +5<CR>', { noremap = true, silent = true })
+-- Уменьшение высоты окна
+vim.keymap.set('n', '<A-9>', ':horizontal resize -5<CR>', { noremap = true, silent = true })
+-- Увеличение высоты окна
+vim.keymap.set('n', '<A-0>', ':horizontal resize +5<CR>', { noremap = true, silent = true })
 -- alt+3 - Перейти на пред. вкладку
 vim.keymap.set('n', '<A-3>', ':tabprevious<CR>', { noremap = true, silent = true })
 -- alt+4 - Перейти на след. вкладку
