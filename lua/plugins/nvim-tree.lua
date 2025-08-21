@@ -27,9 +27,12 @@ return {
         local nvt_api = require("nvim-tree.api")
 
         -- При закрытии файла дерево директорий также закрывается
+        -- если этот файл был один на вкладке 
         vim.api.nvim_create_autocmd("QuitPre", {
             callback = function()
-                if nvt_api.tree.winid() ~= nil then
+                local tabpage = vim.api.nvim_get_current_tabpage()
+                local windows = vim.api.nvim_tabpage_list_wins(tabpage)
+                if nvt_api.tree.winid() ~= nil and #windows == 2 then
                     nvt_api.tree.close()
                 end
             end,
