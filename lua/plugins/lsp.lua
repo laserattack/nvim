@@ -58,6 +58,7 @@ local function toggle_diagnostics()
         vim.diagnostic.config({
             virtual_text = {
                 virt_text_pos = 'right_align',
+                suffix = " ",
             },
             signs = false,
             underline = false,
