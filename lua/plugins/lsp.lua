@@ -1,8 +1,10 @@
 -- Настройки LSP серверов
 
+-- Индикатор включенной диагностики
+local diagnostics_active = false
+
 -- Чтобы добавить сервер надо в табличку добавить новое поле с его настройками
 -- в cmd добавить путь до бинарника сервера
-
 local ls_settings = {
     lua_ls = {
         cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/lua/bin/lua-language-server') },
@@ -18,8 +20,7 @@ local ls_settings = {
                 workspace = {
                     -- Ограничение на кол-во загружаемых для анализа файлов
                     -- а то редактирование конфига может жрать 2гб, т.к. грузит
-                    -- кучу .lua файлов.
-                    -- А для простого программирования на .lua 50 файлов хватает
+                    -- кучу .lua файлов. А для простого программирования на .lua 50 файлов хватает
                     maxPreload = 50,
                     checkThirdParty = false,
                 },
@@ -42,20 +43,6 @@ local ls_settings = {
     },
 }
 
--- Общие настройки
-local general_settings = function(_, _)
-    vim.diagnostic.config({
-        virtual_text = {
-            -- позиция текста об ошибках - в правом конце строки
-            virt_text_pos = 'right_align',
-        },
-        -- не показывать значки на полях
-        signs = false,
-        -- не подчеркивать места с ошибками
-        underline = false,
-    })
-end
-
 -- Функция для проверки наличия серверов
 local function check_lsp_path(_, binary_path)
     if vim.fn.executable(binary_path) ~= 1 then
@@ -64,18 +51,44 @@ local function check_lsp_path(_, binary_path)
     return true
 end
 
+local function toggle_diagnostics()
+    diagnostics_active = not diagnostics_active
+
+    if diagnostics_active then
+        vim.diagnostic.config({
+            virtual_text = {
+                virt_text_pos = 'right_align',
+            },
+            signs = false,
+            underline = false,
+        })
+    else
+        vim.diagnostic.config({
+            virtual_text = false,
+            signs = false,
+            underline = false,
+        })
+    end
+end
+
 return {
     dir = '~/.config/nvim/deps/plugins/nvim-lspconfig',
     dependencies = {
         { dir = '~/.config/nvim/deps/plugins/lsp-status.nvim' }
     },
     config = function()
+        toggle_diagnostics()
+        -- Выключение/включение предупреждений на полях
+        vim.keymap.set('n', '<A-d>', toggle_diagnostics, {
+            noremap = true,
+            silent = true,
+        })
+
         for server_name, server_settings in pairs(ls_settings) do
             if not check_lsp_path(server_name, server_settings.cmd[1]) then
                goto continue
             end
 
-            server_settings.on_attach = general_settings
             require("lspconfig")[server_name].setup(server_settings)
 
             ::continue::
