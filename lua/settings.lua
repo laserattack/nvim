@@ -41,13 +41,12 @@ vim.opt.guicursor = "a:block-blinkon500-blinkoff500"
 -- меняется на директорию в которой этот файл
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function(data)
-        local directory = vim.fn.isdirectory(data.file) == 1
-        if not directory then
-            local current_file = vim.api.nvim_buf_get_name(0)
-            if current_file ~= "" then
-                local file_dir = vim.fn.fnamemodify(current_file, ":h")
-                vim.cmd("cd " .. vim.fn.fnameescape(file_dir))
-            end
+        local target_dir = data.file
+        if vim.fn.isdirectory(data.file) ~= 1 then
+            target_dir = vim.fn.fnamemodify(data.file, ":h")
+        end
+        if target_dir and target_dir ~= "" and vim.fn.isdirectory(target_dir) == 1 then
+            vim.cmd("cd " .. vim.fn.fnameescape(target_dir))
         end
     end,
 })
