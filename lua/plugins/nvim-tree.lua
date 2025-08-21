@@ -5,6 +5,20 @@ return {
     dependencies = {
         { dir = "~/.config/nvim/deps/plugins/nvim-web-devicons" }
     },
+    -- Загружаем при старте, если открыта директория, или по клавишам
+    event = function()
+        if vim.fn.argc() == 1 then
+            local stat = vim.loop.fs_stat(vim.fn.argv(0))
+            if stat and stat.type == "directory" then
+                return "VimEnter"
+            end
+        end
+    end,
+    keys = {
+        { "<A-e>", ":NvimTreeToggle<CR>", mode = "n", noremap = true, silent = true },
+        { "<A-]>", function() require("nvim-tree.api").tree.change_root_to_node() end, mode = "n", noremap = true, silent = true },
+        { "<A-t>", function() require("nvim-tree.api").node.open.tab() end, mode = "n", noremap = true, silent = true },
+    },
     config = function()
         require("nvim-tree").setup {
             sync_root_with_cwd = true,
@@ -25,7 +39,13 @@ return {
             }
         }
         local nvt_api = require("nvim-tree.api")
-
+        -- Автоматически открывать nvim-tree при загрузке, если открыта директория
+        if vim.fn.argc() == 1 then
+            local stat = vim.loop.fs_stat(vim.fn.argv(0))
+            if stat and stat.type == "directory" then
+                nvt_api.tree.open()
+            end
+        end
         -- При закрытии файла дерево директорий также закрывается
         -- если этот файл был один на вкладке 
         vim.api.nvim_create_autocmd("QuitPre", {
@@ -37,12 +57,5 @@ return {
                 end
             end,
         })
-
-        -- alt+e - открыть/закрыть меню директорий
-        vim.keymap.set("n", "<A-e>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-        -- alt+] - сделать выбранную директорию корневой
-        vim.keymap.set("n", "<A-]>", nvt_api.tree.change_root_to_node, { noremap = true, silent = true })
-        -- alt+t - открывает файл в новой вкладке
-        vim.keymap.set("n", "<A-t>", nvt_api.node.open.tab, { noremap = true, silent = true })
     end
 }
