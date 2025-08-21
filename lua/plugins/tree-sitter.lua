@@ -2,6 +2,8 @@
 
 return {
     dir = "~/.config/nvim/deps/plugins/nvim-treesitter",
+    -- Добавляешь новый парсер - укажи сюда
+    -- расширение файлов, которые он обрабатывает
     event = {
         "BufReadPre *.lua", "BufNewFile *.lua",
         "BufReadPre *.zig", "BufNewFile *.zig",

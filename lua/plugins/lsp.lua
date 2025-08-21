@@ -5,6 +5,7 @@ local diagnostics_active = false
 
 -- Чтобы добавить сервер надо в табличку добавить новое поле с его настройками
 -- в cmd добавить путь до бинарника сервера
+-- еще снизу в поле event добавить аналогичную строку для нового расширения
 local ls_settings = {
     lua_ls = {
         cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/lua/bin/lua-language-server') },
