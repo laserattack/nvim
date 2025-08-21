@@ -11,7 +11,12 @@ vim.keymap.set('n', '<A-z>',
         vim.opt.wrap = not vim.opt.wrap:get()
     end, { noremap = true, silent = true })
 -- alt+` - открыть терминал
-vim.keymap.set('n', '<A-`>', ':split | terminal<CR><C-\\><C-n><C-w>:resize 5<CR>i', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-`>', ':split | terminal<CR>', { noremap = true, silent = true })
+-- Автоматически startinsert при открытии терминала
+vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "*",
+    command = "startinsert"
+})
 -- Выход из режима терминала используя esc
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 -- Уменьшение ширины окна
