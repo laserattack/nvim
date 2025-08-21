@@ -2,6 +2,7 @@
 
 return {
     dir = '~/.config/nvim/deps/plugins/nvim-cmp',
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
         { dir = '~/.config/nvim/deps/plugins/cmp-buffer' },
         { dir = '~/.config/nvim/deps/plugins/cmp-path' },

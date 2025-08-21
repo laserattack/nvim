@@ -2,6 +2,13 @@
 
 return {
     dir = "~/.config/nvim/deps/plugins/nvim-treesitter",
+    event = {
+        "BufReadPre *.lua", "BufNewFile *.lua",
+        "BufReadPre *.zig", "BufNewFile *.zig",
+        "BufReadPre *.c", "BufNewFile *.c",
+        "BufReadPre *.cpp", "BufNewFile *.cpp",
+        "BufReadPre *.py", "BufNewFile *.py",
+    },
     config = function()
 
         local parser_config = require("nvim-treesitter.parsers").get_parser_configs()

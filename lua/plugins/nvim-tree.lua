@@ -18,9 +18,25 @@ return {
         end
     end,
     keys = {
-        { "<A-e>", ":NvimTreeToggle<CR>", mode = "n", noremap = true, silent = true },
-        { "<A-]>", function() require("nvim-tree.api").tree.change_root_to_node() end, mode = "n", noremap = true, silent = true },
-        { "<A-t>", function() require("nvim-tree.api").node.open.tab() end, mode = "n", noremap = true, silent = true },
+        {
+            "<A-e>", function()
+                require("nvim-tree.api").tree.toggle()
+                if require("nvim-tree.api").tree.is_visible() then
+                    vim.cmd("wincmd p")
+                end
+            end,
+            mode = "n", noremap = true, silent = true, desc = "Toggle NvimTree and focus back"
+        },
+        {
+            "<A-]>", function()
+                require("nvim-tree.api").tree.change_root_to_node()
+            end, mode = "n", noremap = true, silent = true
+        },
+        {
+            "<A-t>", function()
+                require("nvim-tree.api").node.open.tab()
+            end, mode = "n", noremap = true, silent = true
+        },
     },
     config = function()
         require("nvim-tree").setup {

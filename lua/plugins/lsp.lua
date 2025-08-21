@@ -74,6 +74,15 @@ end
 
 return {
     dir = '~/.config/nvim/deps/plugins/nvim-lspconfig',
+    -- Плагиз загружается когда либо открывается какой то существующий файл
+    -- или создается какой то новый файл (из перечисленных расширений)
+    event = {
+        "BufReadPre *.lua", "BufNewFile *.lua",
+        "BufReadPre *.zig", "BufNewFile *.zig",
+        "BufReadPre *.c", "BufNewFile *.c",
+        "BufReadPre *.cpp", "BufNewFile *.cpp",
+    },
+    --
     dependencies = {
         { dir = '~/.config/nvim/deps/plugins/lsp-status.nvim' }
     },
