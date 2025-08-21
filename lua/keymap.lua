@@ -11,7 +11,7 @@ vim.keymap.set('n', '<A-z>',
         vim.opt.wrap = not vim.opt.wrap:get()
     end, { noremap = true, silent = true })
 -- alt+` - открыть терминал
-vim.keymap.set('n', '<A-`>', ':bot split | terminal<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-`>', ':split | terminal<CR>', { noremap = true, silent = true })
 -- Автоматически startinsert при открытии терминала
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
