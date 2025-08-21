@@ -30,8 +30,8 @@ vim.opt.tabstop = 4
 vim.opt.smarttab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-
-vim.opt.guicursor = "n-v-c:block-blinkon500-blinkoff500,i-ci-ve:ver25-blinkon500-blinkoff500,r-cr:hor20-blinkon500-blinkoff500"
+-- Настройка внешнего вида курсора (во всех режимах одинаковый + мигает)
+vim.opt.guicursor = "a:block-blinkon500-blinkoff500"
 
 -- При открытии nvim (если открывается файл) рабочая директория
 -- меняется на директорию в которой этот файл
