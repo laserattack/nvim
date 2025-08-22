@@ -1,3 +1,4 @@
 deps/lsp/*/
 *so
+deps/plugins/dashboard-nvim/lua/dashboard/theme/dashboard-custom-theme.lua
 deps/plugins/_/

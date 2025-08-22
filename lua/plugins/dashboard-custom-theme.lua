@@ -5,9 +5,7 @@ local ns = api.nvim_create_namespace('dashboard')
 local function gen_shortcut(config)
   local shortcut = config.shortcut
     or {
-      { desc = '[  Github]', group = 'DashboardShortCut' },
-      { desc = '[  glepnir]', group = 'DashboardShortCut' },
-      { desc = '[  0.2.3]', group = 'DashboardShortCut' },
+      { desc = "Wanna code?" },
     }
 
   if vim.tbl_isempty(shortcut) then
@@ -123,7 +121,7 @@ end
 local function project_list(config, callback)
   config.project = vim.tbl_extend('force', {
     limit = 8,
-    enable = true,
+    enable = false,
     icon = '󰏓 ',
     icon_hl = 'DashboardRecentProjectIcon',
     action = 'Telescope find_files cwd=',
@@ -480,7 +478,7 @@ end
 local function gen_footer(config)
   local footer = {
     '',
-    ' 🚀 Sharp tools make good work.',
+    ' Do cool stuff!',
   }
 
   if type(config.footer) == 'string' then
@@ -541,6 +539,7 @@ local function theme_instance(config)
       utils.disable_move_key(config.bufnr)
     end
     require('dashboard.theme.header').generate_header(config)
+    vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#7fb4ca' })
     if not config.shortcut or not vim.tbl_isempty(config.shortcut) then
       gen_shortcut(config)
     end
