@@ -4,9 +4,9 @@
 -- либо при запуске nvim с директорией в аргумент
 
 return {
-    dir = "~/.config/nvim/deps/plugins/nvim-tree.lua",
+    dir = CFGP.."/deps/plugins/nvim-tree.lua",
     dependencies = {
-        { dir = "~/.config/nvim/deps/plugins/nvim-web-devicons" }
+        { dir = CFGP.."/deps/plugins/nvim-web-devicons" }
     },
     -- Загружаем при старте, если открыта директория, или по клавишам
     event = function()

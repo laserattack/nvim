@@ -1,7 +1,7 @@
 -- Настройки цветовой темы
 
 return  {
-    dir = "~/.config/nvim/deps/plugins/kanagawa.nvim",
+    dir = CFGP.."/deps/plugins/kanagawa.nvim",
     config = function()
         vim.cmd("colorscheme kanagawa-wave")
         -- Фон у колонки с номерами строк выключаю

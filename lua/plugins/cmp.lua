@@ -1,13 +1,13 @@
 -- Варианты автодополнения вводимого текста 
 
 return {
-    dir = '~/.config/nvim/deps/plugins/nvim-cmp',
+    dir = CFGP..'/deps/plugins/nvim-cmp',
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-        { dir = '~/.config/nvim/deps/plugins/cmp-buffer' },
-        { dir = '~/.config/nvim/deps/plugins/cmp-path' },
-        { dir = '~/.config/nvim/deps/plugins/cmp-cmdline' },
-        { dir = '~/.config/nvim/deps/plugins/cmp-nvim-lsp' },
+        { dir = CFGP..'/deps/plugins/cmp-buffer' },
+        { dir = CFGP..'/deps/plugins/cmp-path' },
+        { dir = CFGP..'/deps/plugins/cmp-cmdline' },
+        { dir = CFGP..'/deps/plugins/cmp-nvim-lsp' },
     },
     config = function()
         local cmp = require('cmp')

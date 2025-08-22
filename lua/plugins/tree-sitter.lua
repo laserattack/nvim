@@ -1,7 +1,7 @@
 -- Настройка treesitter`a
 
 return {
-    dir = "~/.config/nvim/deps/plugins/nvim-treesitter",
+    dir = CFGP.."/deps/plugins/nvim-treesitter",
     -- Добавляешь новый парсер - укажи сюда
     -- расширение файлов, которые он обрабатывает
     event = {
@@ -19,11 +19,11 @@ return {
         -- если их не выставить, то парсеры будут скачиваться с гитхаба
         -- аналогично можно указать путь до локального репозитория с парсером для 
         -- любого языка из ensure_installed
-        parser_config.c.install_info.url = "~/.config/nvim/deps/tree-sitter-parsers/tree-sitter-c"
-        parser_config.cpp.install_info.url = "~/.config/nvim/deps/tree-sitter-parsers/tree-sitter-cpp"
-        parser_config.lua.install_info.url = "~/.config/nvim/deps/tree-sitter-parsers/tree-sitter-lua"
-        parser_config.zig.install_info.url = "~/.config/nvim/deps/tree-sitter-parsers/tree-sitter-zig"
-        parser_config.python.install_info.url = "~/.config/nvim/deps/tree-sitter-parsers/tree-sitter-python"
+        parser_config.c.install_info.url = CFGP.."/deps/tree-sitter-parsers/tree-sitter-c"
+        parser_config.cpp.install_info.url = CFGP.."/deps/tree-sitter-parsers/tree-sitter-cpp"
+        parser_config.lua.install_info.url = CFGP.."/deps/tree-sitter-parsers/tree-sitter-lua"
+        parser_config.zig.install_info.url = CFGP.."/deps/tree-sitter-parsers/tree-sitter-zig"
+        parser_config.python.install_info.url = CFGP.."/deps/tree-sitter-parsers/tree-sitter-python"
 
         -- Тут надо указать нужные языки
         require("nvim-treesitter.configs").setup({

@@ -23,7 +23,7 @@ return {
     event = 'VimEnter',
     config = function()
 
-        -- Встраиваю свою кастомную тему в плаги
+        -- Встраиваю свою кастомную тему в плагин
         -- файл с именем theme и расширением .lua должен быть в директории lua/plugins/
 
         local theme = "dashboard-custom-theme"

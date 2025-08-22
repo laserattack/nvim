@@ -8,7 +8,7 @@ local diagnostics_active = false
 -- еще снизу в поле event добавить аналогичную строку для нового расширения
 local ls_settings = {
     lua_ls = {
-        cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/lua/bin/lua-language-server') },
+        cmd = { CFGP..'/deps/lsp/lua/bin/lua-language-server' },
         settings = {
             Lua = {
                 runtime = {
@@ -32,10 +32,10 @@ local ls_settings = {
         },
     },
     zls = {
-        cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/zls/zls') },
+        cmd = { CFGP..'/deps/lsp/zls/zls' },
     },
     clangd = {
-        cmd = { vim.fn.expand('~/.config/nvim/deps/lsp/clangd/bin/clangd') },
+        cmd = { CFGP..'/deps/lsp/clangd/bin/clangd' },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
         single_file_support = true,
         capabilities = {
@@ -74,7 +74,7 @@ local function toggle_diagnostics()
 end
 
 return {
-    dir = '~/.config/nvim/deps/plugins/nvim-lspconfig',
+    dir = CFGP..'/deps/plugins/nvim-lspconfig',
     -- Плагиз загружается когда либо открывается какой то существующий файл
     -- или создается какой то новый файл (из перечисленных расширений)
     event = {
@@ -85,7 +85,7 @@ return {
     },
     --
     dependencies = {
-        { dir = '~/.config/nvim/deps/plugins/lsp-status.nvim' }
+        { dir = CFGP..'/deps/plugins/lsp-status.nvim' }
     },
     config = function()
         toggle_diagnostics()

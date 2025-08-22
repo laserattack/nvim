@@ -10,8 +10,7 @@ local plugins = {
     "plugins/dashboard",
 }
 
-local lazypath = vim.fn.stdpath("config") .. "/deps/plugins/lazy.nvim"
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(CFGP.."/deps/plugins/lazy.nvim")
 local for_setup = {}
 for _, v in ipairs(plugins) do
     for_setup[#for_setup+1] = require(v)

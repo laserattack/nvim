@@ -1,9 +1,9 @@
 -- Настройки статус-бара
 
 return  {
-    dir = '~/.config/nvim/deps/plugins/lualine.nvim',
+    dir = CFGP..'/deps/plugins/lualine.nvim',
     dependencies = {
-        { dir = '~/.config/nvim/deps/plugins/nvim-web-devicons' }
+        { dir = CFGP..'/deps/plugins/nvim-web-devicons' }
     },
     config = function()
         require('lualine').setup {
