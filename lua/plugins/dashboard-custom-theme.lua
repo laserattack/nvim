@@ -428,7 +428,7 @@ local function gen_center(plist, config)
 
   -- initialize the cursor pos
   first_line = first_line - 1
-  api.nvim_win_set_cursor(config.winid, { first_line + 3, start_col + 4 })
+  api.nvim_win_set_cursor(config.winid, { first_line + 3, start_col - 2 })
 
   for i, data in pairs(mgroups) do
     local len, group = unpack(data)
