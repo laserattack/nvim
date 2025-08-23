@@ -33,7 +33,7 @@ return {
             highlight = {
                 enable = true,
                 -- Сюда можно написать список парсеров которые отключить 
-                disable = {},
+                disable = { "markdown", "markdown_inline" },
             },
         })
     end
