@@ -1,5 +1,7 @@
 -- Базовые бинды (не относящиеся к плагинам) 
 
+-- h - скрытие подсветки резульатов поиска
+vim.keymap.set('n', 'h', ':nohlsearch<CR>', { noremap = true, silent = true })
 -- alt+w - циклическое переключение между окнами
 vim.keymap.set("n", "<A-w>", "<C-w>w", { noremap = true, silent = true })
 -- Tab/Shift-Tab для сдвига текста в визуальном режиме 
