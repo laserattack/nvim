@@ -1,5 +1,6 @@
 # Мой конфиг neovim
 
+- Шрифтом терминала надо поставить `JetBrainsMono Nerd Font Regular` ([ссылочка](https://www.nerdfonts.com/font-downloads))
 - Репозиторий склонировать в `~/.config`, должна появиться папка `~/.config/nvim`
 - Все зависимости в папке `deps`, ничего не будет ни откуда скачиваться
 - О том как добавить какой-нибудь Language Server написано в `lua/plugins/lsp.lua`
