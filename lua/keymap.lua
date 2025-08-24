@@ -1,5 +1,7 @@
 -- Базовые бинды (не относящиеся к плагинам) 
 
+vim.keymap.set('n', '<A-u>', '<C-u>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-d>', '<C-d>', { noremap = true, silent = true })
 -- p - вставка без перезаписи буфера копирования
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 -- alt+h - скрытие/возвращение подсветки резульатов поиска
