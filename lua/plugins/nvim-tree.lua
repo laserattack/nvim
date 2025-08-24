@@ -25,7 +25,7 @@ return {
                     vim.cmd("wincmd p")
                 end
             end,
-            mode = "n", noremap = true, silent = true, desc = "Toggle NvimTree and focus back"
+            mode = "n", noremap = true, silent = true
         },
         {
             "<A-]>", function()
