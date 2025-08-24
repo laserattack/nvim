@@ -5,7 +5,7 @@ local ns = api.nvim_create_namespace('dashboard')
 local function gen_shortcut(config)
   local shortcut = config.shortcut
     or {
-      { desc = "Wanna code?" },
+        { desc = "Wanna code?" },
     }
 
   if vim.tbl_isempty(shortcut) then
@@ -478,7 +478,6 @@ end
 local function gen_footer(config)
   local footer = {
     '',
-    ' Do cool stuff!',
   }
 
   if type(config.footer) == 'string' then
@@ -539,6 +538,7 @@ local function theme_instance(config)
       utils.disable_move_key(config.bufnr)
     end
     require('dashboard.theme.header').generate_header(config)
+    vim.api.nvim_set_hl(0, 'DashboardShortCut', { fg = '#7fb4ca' })
     vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#7fb4ca' })
     if not config.shortcut or not vim.tbl_isempty(config.shortcut) then
       gen_shortcut(config)
