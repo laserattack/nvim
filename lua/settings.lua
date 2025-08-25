@@ -1,5 +1,4 @@
 -- Базовые настройки (не относящиеся к плагинам)
-
 -- Тильды (которые вместо номеров в пустых строках) на пробелы заменяю
 vim.opt.fillchars = { eob = " " }
 -- Отключение netrw, т.к. используется nvim-tree
@@ -45,5 +44,13 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
         if target_dir and target_dir ~= "" and vim.fn.isdirectory(target_dir) == 1 then
             vim.cmd("cd " .. vim.fn.fnameescape(target_dir))
         end
+    end,
+})
+-- Автоматическое переключение на US раскладку
+-- при выходе из Insert Mode (в системе требуется утилита xkb-switch)
+vim.api.nvim_create_autocmd("InsertLeave", {
+    pattern = "*",
+    callback = function()
+        vim.fn.system("xkb-switch -s us")
     end,
 })
