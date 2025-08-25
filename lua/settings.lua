@@ -47,9 +47,13 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     end,
 })
 -- Автоматическое переключение на US раскладку
--- при выходе из Insert Mode (в системе требуется утилита xkb-switch)
-vim.api.nvim_create_autocmd("InsertLeave", {
-    pattern = "*",
+-- при заходе в NormalMode (в системе требуется утилита xkb-switch)
+vim.api.nvim_create_autocmd({
+    "InsertLeave",
+    "CmdlineLeave",
+    "TermLeave",
+    "VimEnter",
+}, {
     callback = function()
         vim.fn.system("xkb-switch -s us")
     end,
