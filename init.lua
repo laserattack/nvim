@@ -6,3 +6,7 @@ require("settings")
 require("keymap")
 -- Подгружает плагины и их настройки
 require("plugins/init")
+-- Добавление рабочей директории (из который запускается nvim)
+-- в пути рантайма (позволяет брать, например, подсветку
+-- из подпапки syntax текущей рабочей директории)
+vim.opt.runtimepath:prepend(vim.fn.getcwd())
