@@ -6,7 +6,7 @@
 - О том как добавить какой-нибудь Language Server написано в `lua/plugins/lsp.lua`
 - О том как добавить парсер для какого-нибудь языка в tree-sitter (умная подсветка) написано в `lua/plugins/tree-sitter.lua`
 
-#### xkb-switch
+#### xkb-switch (можно скачать из релизов в этом репо)
 
 Используется утилита [xkb-switch](https://github.com/sergei-mironov/xkb-switch) для автоматического переключения системной раскладки на `us` при выходе из режима вставки
 
