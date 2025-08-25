@@ -31,6 +31,7 @@ make
 ### Моя версия nvim (можно скачать из релизов в этом репо)
 
 ```
+→ ~ $ nvim --version
 NVIM v0.11.3
 Build type: Release
 LuaJIT 2.1.1741730670
