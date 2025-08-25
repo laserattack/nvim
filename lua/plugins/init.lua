@@ -7,6 +7,7 @@ local plugins = {
     "plugins/lsp",
     "plugins/mini-surround",
     "plugins/dashboard",
+    "plugins/fasm-highlight",
 }
 
 vim.opt.rtp:prepend(CFGP.."/deps/plugins/lazy.nvim")
