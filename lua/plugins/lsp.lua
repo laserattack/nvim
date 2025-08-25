@@ -83,10 +83,6 @@ return {
         "BufReadPre *.c", "BufNewFile *.c",
         "BufReadPre *.cpp", "BufNewFile *.cpp",
     },
-    --
-    dependencies = {
-        { dir = CFGP..'/deps/plugins/lsp-status.nvim' }
-    },
     config = function()
         toggle_diagnostics()
         -- Выключение/включение предупреждений на полях

@@ -1,11 +1,10 @@
 -- Настройка менеджера плагинов
 local plugins = {
     "plugins/nvim-tree",
-    "plugins/color-scheme-plain",
+    "plugins/color-scheme",
     "plugins/tree-sitter",
     "plugins/cmp",
     "plugins/lsp",
-    "plugins/status-bar",
     "plugins/mini-surround",
     "plugins/dashboard",
 }

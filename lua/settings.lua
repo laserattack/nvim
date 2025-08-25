@@ -12,10 +12,6 @@ vim.opt.showtabline = 2
 vim.opt.signcolumn = "yes"
 -- Чтобы не было подвисаний при работе LSP
 vim.opt.updatetime = 300
--- Отключение системного статус-бара, т.к. его заменяет плагин
--- vim.opt.laststatus = 0
-vim.opt.showmode = false
-vim.opt.showcmd = false
 -- Для нормального взамодействия с системным буфером
 vim.opt.clipboard = "unnamedplus"
 -- Отключение swap файлов
