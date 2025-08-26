@@ -13,7 +13,7 @@ end
 local function toggle_search_highlight()
     vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end
--- alt+v - выполнение текущей строки луа кода 
+-- el - выполнение текущей строки луа кода 
 vim.api.nvim_set_hl(0, "EvalLineOutput", { fg = "#ffffff", bg = "#000000" })
 
 function _G.eval_lua_line()
@@ -57,7 +57,12 @@ function _G.eval_lua_line()
     if not success then
         output = "=> error"
     elseif #output_lines > 0 then
-        output = "=> " .. table.concat(output_lines, ", ") .. " @@ "..tostring(result)
+        if result ~= nil then
+            result = tostring(result)
+            output = "=> " .. table.concat(output_lines, ", ") .. " @@ "..tostring(result)
+        else
+            output = "=> " .. table.concat(output_lines, ", ")
+        end
     else
         output = "=> " .. tostring(result)
     end
