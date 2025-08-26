@@ -75,7 +75,7 @@
 
 #### Замена
 
-`:[range]s[ubstitute]/pattern/replacement/[flags]`
+`:s/pattern/replacement/`
 
 Примеры
 
