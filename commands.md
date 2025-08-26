@@ -75,7 +75,7 @@
 
 #### Замена
 
-`:s/pattern/replacement/`
+`:[range]s/pattern/replacement/`
 
 Примеры
 
