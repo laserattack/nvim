@@ -1,4 +1,4 @@
--- Базовые бинды (не относящиеся к плагинам) 
+-- Базовые бинды (не относящиеся к плагинам)
 
 -- Выход из терминала с сохранением истории
 local function close_terminal()
@@ -13,7 +13,63 @@ end
 local function toggle_search_highlight()
     vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end
+-- alt+v - выполнение текущей строки луа кода 
+vim.api.nvim_set_hl(0, "EvalLineOutput", { fg = "#ffffff", bg = "#000000" })
 
+function _G.eval_lua_line()
+    local line = vim.api.nvim_get_current_line()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+    local ns = vim.api.nvim_create_namespace("eval_lua")
+
+    local marks = vim.api.nvim_buf_get_extmarks(bufnr, ns, {lnum, 0}, {lnum, -1}, {details = true})
+    if #marks > 0 then
+        vim.api.nvim_buf_clear_namespace(bufnr, ns, lnum, lnum + 1)
+        return
+    end
+
+    local output_lines = {}
+    local function capture_print(...)
+        local args = {...}
+        for _, arg in ipairs(args) do
+            table.insert(output_lines, tostring(arg))
+        end
+    end
+
+    local original_print = print
+    print = capture_print
+
+    -- Исполнение чанка кода, могут быть и принты и возвращение результата через return
+    local success, result = pcall(function()
+        return loadstring(line)()
+    end)
+
+    -- Не удалось исполнить чанк, пытаюсь с return
+    if not success then
+        success, result = pcall(function()
+            return loadstring("return " .. line)()
+        end)
+    end
+
+    print = original_print
+
+    local output
+    if not success then
+        output = "=> error"
+    elseif #output_lines > 0 then
+        output = "=> " .. table.concat(output_lines, ", ") .. " @@ "..tostring(result)
+    else
+        output = "=> " .. tostring(result)
+    end
+
+    vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+        virt_text = {{ output, "EvalLineOutput" }},
+        virt_text_pos = "eol",
+        hl_mode = "combine",
+    })
+end
+
+vim.keymap.set('n', 'el', '<cmd>lua _G.eval_lua_line()<CR>')
 -- Сделать директорию текущего открытого файла рабочей директорией
 vim.keymap.set('n', 'cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
 -- Скролл экран вверх/экран вниз на alt+u/d
