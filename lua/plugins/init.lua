@@ -1,5 +1,6 @@
 -- Настройка менеджера плагинов
 local plugins = {
+    "plugins/telescope",
     "plugins/nvim-tree",
     "plugins/color-scheme",
     "plugins/tree-sitter",

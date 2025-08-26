@@ -1,9 +1,17 @@
 -- Базовые бинды (не относящиеся к плагинам) 
 
+-- Отключение стрелочек в режиме вставки и выделения
+for _, mode in pairs({'n', 'v'}) do
+    vim.keymap.set(mode, '<Up>', '<Nop>')
+    vim.keymap.set(mode, '<Down>', '<Nop>')
+    vim.keymap.set(mode, '<Left>', '<Nop>')
+    vim.keymap.set(mode, '<Right>', '<Nop>')
+end
+-- Скролл экран вверх/экран вниз на alt+u/d
 vim.keymap.set('n', '<A-u>', '<C-u>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-d>', '<C-d>', { noremap = true, silent = true })
--- p - вставка без перезаписи буфера копирования
-vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
+-- p - вставка в режиме выделения без перезаписи буфера копирования
+vim.keymap.set('v', 'p', 'p:let @+=@0<CR>', { noremap = true, silent = true })
 -- alt+h - скрытие/возвращение подсветки резульатов поиска
 vim.keymap.set('n', '<A-h>', function()
     vim.opt.hlsearch = not vim.opt.hlsearch:get()
