@@ -74,6 +74,13 @@ function _G.eval_lua_line()
     })
 end
 
+for _, mode in ipairs({'n','v'}) do
+    vim.keymap.set(mode, '<Up>', '<C+Up>')
+    vim.keymap.set(mode, '<Down>', '<C+Down>')
+    vim.keymap.set(mode, '<Left>', '<C+Left>')
+    vim.keymap.set(mode, '<Right>', '<C+Right>')
+end
+
 vim.keymap.set('n', 'el', '<cmd>lua _G.eval_lua_line()<CR>')
 -- Сделать директорию текущего открытого файла рабочей директорией
 vim.keymap.set('n', 'cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
