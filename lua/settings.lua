@@ -3,8 +3,8 @@
 vim.opt.fillchars = { eob = " " }
 -- Отключение netrw, т.к. используется nvim-tree
 -- (в документации nvim-tree написано отключить)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
 -- всегда показывать строку с вкладками
 vim.opt.showtabline = 2
 -- слева от номеров строк пустое пространство размером с 1 символ
