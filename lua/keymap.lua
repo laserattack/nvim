@@ -2,35 +2,27 @@
 
 -- Работа с терминалом 
 do
-    local function toggle_terminal()
-        if vim.api.nvim_get_mode().mode == 't' then
-            os.execute("history -a")
-            vim.cmd('q')
-        else
-            vim.cmd('tabnew')
-            vim.cmd('terminal')
-        end
+    local function open_terminal()
+        vim.cmd('tabnew')
+        vim.cmd('terminal')
     end
     -- alt+` - открыть/закрыть терминал
-    vim.keymap.set({'n', 't'}, '<A-`>', toggle_terminal, { noremap = true, silent = true })
+    vim.keymap.set('n', '<A-`>', open_terminal, { noremap = true, silent = true })
     -- Выход из режима терминала через ESC
-    vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {noremap = true, silent = true})
+    vim.keymap.set('t', '<Esc>', function() vim.cmd("stopinsert") end, {noremap = true, silent = true}
+    )
     -- Автоматически startinsert при открытии терминала
     vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
 end
 
 -- Работа с файлами
 do
-    local function toggle_netrw()
-        if vim.bo.filetype == 'netrw' then
-            vim.cmd('q')
-        else
-            vim.cmd('tabnew')
-            vim.cmd('Explore')
-        end
+    local function open_netrw()
+        vim.cmd('tabnew')
+        vim.cmd('Explore')
     end
     -- Открывает дерево директорий в новой вкладке/закрывает его
-    vim.keymap.set('n', '<A-e>', toggle_netrw, { noremap = true, silent = true })
+    vim.keymap.set('n', '<A-e>', open_netrw, { noremap = true, silent = true })
 end
 
 -- Работа с текстом
