@@ -20,6 +20,8 @@ vim.opt.swapfile = false
 -- Относительные номера строк
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 -- Чтобы не было разбиения строки если она не помещается в ширину экрана
 vim.opt.wrap = false
 vim.wo.linebreak = true
