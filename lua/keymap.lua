@@ -1,18 +1,77 @@
 -- Базовые бинды (не относящиеся к плагинам)
 
--- Выход из терминала с сохранением истории
-local function close_terminal()
-    os.execute("history -a")
-    vim.cmd('bdelete!')
+-- Работа с терминалом 
+do
+    local function toggle_terminal()
+        if vim.api.nvim_get_mode().mode == 't' then
+            os.execute("history -a")
+            vim.cmd('q')
+        else
+            vim.cmd('tabnew')
+            vim.cmd('terminal')
+        end
+    end
+    -- alt+` - открыть/закрыть терминал
+    vim.keymap.set({'n', 't'}, '<A-`>', toggle_terminal, { noremap = true, silent = true })
+    -- Выход из режима терминала через ESC
+    vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {noremap = true, silent = true})
+    -- Автоматически startinsert при открытии терминала
+    vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
 end
--- Переключение режима строк
-local function toggle_wrap_mode()
-    vim.opt.wrap = not vim.opt.wrap:get()
+
+-- Работа с файлами
+do
+    local function toggle_netrw()
+        if vim.bo.filetype == 'netrw' then
+            vim.cmd('q')
+        else
+            vim.cmd('tabnew')
+            vim.cmd('Explore')
+        end
+    end
+    -- Открывает дерево директорий в новой вкладке/закрывает его
+    vim.keymap.set('n', '<A-e>', toggle_netrw, { noremap = true, silent = true })
 end
--- Переключение подсветки результатов поиска
-local function toggle_search_highlight()
-    vim.opt.hlsearch = not vim.opt.hlsearch:get()
+
+-- Работа с текстом
+do
+    -- Переключение подсветки результатов поиска
+    local function toggle_search_highlight()
+        vim.opt.hlsearch = not vim.opt.hlsearch:get()
+    end
+    -- Переключение режима строк
+    local function toggle_wrap_mode()
+        vim.opt.wrap = not vim.opt.wrap:get()
+    end
+    -- Tab/Shift-Tab для сдвига текста в визуальном режиме 
+    vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true })
+    vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true })
+    -- p - вставка в режиме выделения без перезаписи буфера копирования
+    vim.keymap.set('v', 'p', 'p:let @+=@0<CR>', { noremap = true, silent = true })
+    -- alt+h - скрытие/возвращение подсветки резульатов поиска
+    vim.keymap.set('n', '<A-h>', toggle_search_highlight, { noremap = true, silent = true })
+    -- alt+z - vim.opt.wrap = false/true
+    vim.keymap.set('n', '<A-z>', toggle_wrap_mode, { noremap = true, silent = true })
+    -- Отключение стрелочек (переназначение на ctrl+)
+    vim.keymap.set({'n','v'}, '<Up>', '<C+Up>')
+    vim.keymap.set({'n','v'}, '<Down>', '<C+Down>')
+    vim.keymap.set({'n','v'}, '<Left>', '<C+Left>')
+    vim.keymap.set({'n','v'}, '<Right>', '<C+Right>')
+    -- Скролл экран вверх/экран вниз на alt+u/d
+    vim.keymap.set('n', '<A-u>', '<C-u>', { noremap = true, silent = true })
+    vim.keymap.set('n', '<A-d>', '<C-d>', { noremap = true, silent = true })
 end
+
+do
+    -- Работа с вкладками/окнами
+    -- alt+w - циклическое переключение между окнами
+    vim.keymap.set("n", "<A-w>", "<C-w>w", { noremap = true, silent = true })
+    -- alt+3 - Перейти на пред. вкладку
+    vim.keymap.set('n', '<A-1>', ':tabprevious<CR>', { noremap = true, silent = true })
+    -- alt+4 - Перейти на след. вкладку
+    vim.keymap.set('n', '<A-2>', ':tabnext<CR>', { noremap = true, silent = true })
+end
+
 -- el - выполнение текущей строки луа кода 
 vim.api.nvim_set_hl(0, "EvalLineOutput", { fg = "#ffffff", bg = "#000000" })
 
@@ -73,47 +132,5 @@ function _G.eval_lua_line()
         hl_mode = "combine",
     })
 end
-
-for _, mode in ipairs({'n','v'}) do
-    vim.keymap.set(mode, '<Up>', '<C+Up>')
-    vim.keymap.set(mode, '<Down>', '<C+Down>')
-    vim.keymap.set(mode, '<Left>', '<C+Left>')
-    vim.keymap.set(mode, '<Right>', '<C+Right>')
-end
-
+-- Исполнение текущей строки как lua кода
 vim.keymap.set('n', 'el', '<cmd>lua _G.eval_lua_line()<CR>')
--- Сделать директорию текущего открытого файла рабочей директорией
-vim.keymap.set('n', 'cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
--- Скролл экран вверх/экран вниз на alt+u/d
-vim.keymap.set('n', '<A-u>', '<C-u>', { noremap = true, silent = true })
-vim.keymap.set('n', '<A-d>', '<C-d>', { noremap = true, silent = true })
--- p - вставка в режиме выделения без перезаписи буфера копирования
-vim.keymap.set('v', 'p', 'p:let @+=@0<CR>', { noremap = true, silent = true })
--- alt+h - скрытие/возвращение подсветки резульатов поиска
-vim.keymap.set('n', '<A-h>', function() toggle_search_highlight() end, { noremap = true, silent = true })
--- alt+w - циклическое переключение между окнами
-vim.keymap.set("n", "<A-w>", "<C-w>w", { noremap = true, silent = true })
--- Tab/Shift-Tab для сдвига текста в визуальном режиме 
-vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true })
-vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true })
--- alt+z - vim.opt.wrap = false/true
-vim.keymap.set('n', '<A-z>', function() toggle_wrap_mode() end, { noremap = true, silent = true })
--- alt+` - открыть терминал
-vim.keymap.set('n', '<A-`>', ':split | terminal<CR>', { noremap = true, silent = true })
--- Автоматически startinsert при открытии терминала
-vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
--- Выход из режима терминала используя esc/alt+` (с сохранением истории)
-vim.keymap.set('t', '<Esc>', function() close_terminal() end, { noremap = true, silent = true })
-vim.keymap.set('t', '<A-`>', function() close_terminal() end, { noremap = true, silent = true })
--- Уменьшение ширины окна
-vim.keymap.set('n', '<A-1>', ':vertical resize -5<CR>', { noremap = true, silent = true })
--- Увеличение ширины окна
-vim.keymap.set('n', '<A-2>', ':vertical resize +5<CR>', { noremap = true, silent = true })
--- Уменьшение высоты окна
-vim.keymap.set('n', '<A-9>', ':horizontal resize -5<CR>', { noremap = true, silent = true })
--- Увеличение высоты окна
-vim.keymap.set('n', '<A-0>', ':horizontal resize +5<CR>', { noremap = true, silent = true })
--- alt+3 - Перейти на пред. вкладку
-vim.keymap.set('n', '<A-3>', ':tabprevious<CR>', { noremap = true, silent = true })
--- alt+4 - Перейти на след. вкладку
-vim.keymap.set('n', '<A-4>', ':tabnext<CR>', { noremap = true, silent = true })
