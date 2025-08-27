@@ -1,7 +1,8 @@
 return {
     dir = CFGP..'/deps/plugins/telescope.nvim',
     dependencies = {
-        { dir = CFGP..'/deps/plugins/plenary.nvim' }
+        { dir = CFGP..'/deps/plugins/plenary.nvim' },
+        { dir = CFGP..'/deps/plugins/nvim-web-devicons' }
     },
     config = function()
         local telescope = require('telescope')
@@ -9,6 +10,9 @@ return {
         telescope.setup({
             defaults = {
                 preview = false,
+                file_ignore_patterns = {
+                    ".*/deps/.*",
+                },
                 mappings = {
                     i = {
                         ['<Esc>'] = require('telescope.actions').close,

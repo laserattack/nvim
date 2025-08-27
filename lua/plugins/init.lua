@@ -1,13 +1,11 @@
 -- Настройка менеджера плагинов
 local plugins = {
     "plugins/telescope",
---    "plugins/nvim-tree",
     "plugins/color-scheme",
     "plugins/tree-sitter",
     "plugins/cmp",
     "plugins/lsp",
     "plugins/mini-surround",
-    "plugins/dashboard",
 }
 
 vim.opt.rtp:prepend(CFGP.."/deps/plugins/lazy.nvim")
