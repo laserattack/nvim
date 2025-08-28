@@ -34,7 +34,7 @@ vim.keymap.set(
     end,
     { noremap = true, silent = true }
 )
-vim.keymap.set({'n','v'}, '<Up>', '<C+Up>')
-vim.keymap.set({'n','v'}, '<Down>', '<C+Down>')
-vim.keymap.set({'n','v'}, '<Left>', '<C+Left>')
-vim.keymap.set({'n','v'}, '<Right>', '<C+Right>')
+vim.keymap.set({'n','v'}, '<Up>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set({'n','v'}, '<Down>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set({'n','v'}, '<Left>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set({'n','v'}, '<Right>', '<Nop>', { noremap = true, silent = true })
