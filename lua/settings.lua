@@ -38,8 +38,8 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 -- Настройка внешнего вида курсора (во всех режимах одинаковый + мигает)
 vim.opt.guicursor = "a:block-blinkon500-blinkoff500"
--- При открытии nvim (если открывается файл) рабочая директория
--- меняется на директорию в которой этот файл
+-- При открытии nvim рабочая директория меняется
+-- на директорию с открываемым файлом/папкой
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function(data)
         local target_dir = data.file
