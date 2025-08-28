@@ -32,12 +32,32 @@ make
 
 Для успешной сборки `xkb-switch` должны быть установлены также пакеты `libx11-dev`, `libxkbfile-dev`
 
-### Моя версия nvim (можно скачать из релизов в этом репо)
+### Мои версии 
+
+#### nvim
 
 ```
-→ ~ $ nvim --version
+→ nvim --version
 NVIM v0.11.3
-Build type: Release
-LuaJIT 2.1.1741730670
-Run "nvim -V1 -v" for more info
+```
+
+#### xclip
+
+```
+→ xclip -version
+xclip version 0.13
+```
+
+#### xkb-switch
+
+```
+→ xkb-switch --version
+xkb-switch 2.1.0
+```
+
+#### rigrep
+
+```
+→ rg --version
+ripgrep 14.1.0
 ```
