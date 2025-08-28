@@ -7,14 +7,15 @@ return {
     config = function()
         local telescope = require('telescope')
         local builtin = require('telescope.builtin')
+        local actions = require('telescope.actions')
         telescope.setup({
             defaults = {
                 file_ignore_patterns = {
                     ".*/deps/.*",
                 },
                 mappings = {
-                    i = { ['<Esc>'] = require('telescope.actions').close },
-                    n = { ['<Esc>'] = require('telescope.actions').close },
+                    i = { ['<Esc>'] = actions.close },
+                    n = { ['<Esc>'] = actions.close },
                 },
             },
             pickers = {
