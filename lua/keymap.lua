@@ -2,10 +2,17 @@
 -- Бинды плагинов в файликах с подключением плагинов
 
 vim.keymap.set(
+    'n', '<leader>h',
+    function()
+        local commands_file = CFGP..'/commands.md'
+        vim.cmd('tabnew ' .. commands_file)
+    end,
+    { noremap = true, silent = true }
+)
+vim.keymap.set(
     'n', '<leader>`',
     function()
-        vim.cmd('tabnew')
-        vim.cmd('terminal')
+        vim.cmd('tabnew | terminal')
     end,
     { noremap = true, silent = true }
 )
@@ -16,7 +23,6 @@ vim.keymap.set(
     end,
     {noremap = true, silent = true}
 )
-
 vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
 vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true })
