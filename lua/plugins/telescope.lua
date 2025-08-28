@@ -10,9 +10,6 @@ return {
         local actions = require('telescope.actions')
         telescope.setup({
             defaults = {
-                file_ignore_patterns = {
-                    ".*/deps/.*",
-                },
                 mappings = {
                     i = { ['<Esc>'] = actions.close },
                     n = { ['<Esc>'] = actions.close },
@@ -21,9 +18,27 @@ return {
             pickers = {
                 find_files = {
                     previewer = false,
+                    -- Ищу через rg, игнорю директорию с зависимостями
+                    find_command = {
+                        "rg", "--files", "--glob", "!**/deps/**"
+                    },
                 },
+                live_grep = {
+                    -- Аргументы по умолчанию + игнор директории с зависимостями
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        "--glob", "!**/deps/**"
+                    }
+                }
             },
         })
         vim.keymap.set('n', 'ff', builtin.find_files, {})
+        vim.keymap.set('n', 'fg', builtin.live_grep, {})
     end
 }
