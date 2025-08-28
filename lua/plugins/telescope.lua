@@ -14,14 +14,8 @@ return {
                     ".*/deps/.*",
                 },
                 mappings = {
-                    i = {
-                        ['<Esc>'] = require('telescope.actions').close,
-                        ['<A-f>'] = require('telescope.actions').close,
-                    },
-                    n = {
-                        ['<A-f>'] = require('telescope.actions').close,
-                        ['<Esc>'] = require('telescope.actions').close,
-                    },
+                    i = { ['<Esc>'] = require('telescope.actions').close },
+                    n = { ['<Esc>'] = require('telescope.actions').close },
                 },
             },
             pickers = {
@@ -30,6 +24,6 @@ return {
                 },
             },
         })
-        vim.keymap.set('n', '<A-f>', builtin.find_files, {})
+        vim.keymap.set('n', 'ff', builtin.find_files, {})
     end
 }

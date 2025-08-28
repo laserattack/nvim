@@ -86,7 +86,7 @@ return {
     config = function()
         toggle_diagnostics()
         -- Выключение/включение предупреждений на полях
-        vim.keymap.set('n', '<A-l>', toggle_diagnostics, {
+        vim.keymap.set('n', '<leader>l', toggle_diagnostics, {
             noremap = true,
             silent = true,
         })
