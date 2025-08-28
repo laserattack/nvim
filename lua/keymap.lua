@@ -1,6 +1,5 @@
 -- Базовые бинды (не относящиеся к плагинам)
 -- Бинды плагинов в файликах с подключением плагинов
-
 vim.keymap.set(
     'n', '<leader>`',
     function()
@@ -16,6 +15,7 @@ vim.keymap.set(
     end,
     {noremap = true, silent = true}
 )
+
 vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
 vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true })
