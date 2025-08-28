@@ -9,7 +9,6 @@ return {
         local builtin = require('telescope.builtin')
         telescope.setup({
             defaults = {
-                preview = false,
                 file_ignore_patterns = {
                     ".*/deps/.*",
                 },
