@@ -11,13 +11,16 @@
 
 ### Установка
 
-Создание докер-контейнера с рабочим neovim
+Репозиторий склонировать в `~/.config`, должна появиться папка `~/.config/nvim`
+
+Далее из `~/.config/nvim` выполнить
 
 ```
 xhost +local:docker
 docker build -t nvimd .
 docker builder prune -f
 ```
+
 ### Удаление 
 
 ```
