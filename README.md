@@ -16,7 +16,6 @@
 ```
 xhost +local:docker
 docker build -t neovim-config .
-docker create -it --name neovim-config -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY neovim-config
 docker builder prune -f
 ```
 ### Удаление 
@@ -30,11 +29,15 @@ docker builder prune -f
 
 ### Работа в nvim через docker
 
-- Запуск докер-контейнера: `docker start neovim-config`
-- Зайти в контейнер: `docker attach neovim-config`
-- Выйти из контейнера без его выключения: `ctrl+p+q`
-- Выйти из контейнера с его выключением: `exit` в терминале контейнера
-- Выключение контейнера: `docker stop neovim-config`
+Просто запуск контейнера с nvim и монтированным конфигом
+
+```
+docker run -it --rm --name neovim-config \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v ~/.config/nvim:/root/.config/nvim \
+    -e DISPLAY=$DISPLAY \
+    neovim-config
+```
 
 ## Работа с основной системы
 

@@ -35,8 +35,4 @@ WORKDIR /
 RUN rm -rf /xkb-switch-1.8.5
 #
 
-# Копирование конфига
-COPY . /root/.config/nvim/
-#
-
 WORKDIR /workspace
