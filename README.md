@@ -30,15 +30,11 @@ docker builder prune -f
 
 ### Работа в nvim через docker
 
-Запуск докер-контейнера: `docker start neovim-config`
-
-Зайти в контейнер: `docker attach neovim-config`
-
-Выйти из контейнера без его выключения: `ctrl+p+q`
-
-Выйти из контейнера с его выключением: `exit` в терминале контейнера
-
-Выключение контейнера: `docker stop neovim-config`
+- Запуск докер-контейнера: `docker start neovim-config`
+- Зайти в контейнер: `docker attach neovim-config`
+- Выйти из контейнера без его выключения: `ctrl+p+q`
+- Выйти из контейнера с его выключением: `exit` в терминале контейнера
+- Выключение контейнера: `docker stop neovim-config`
 
 ## Работа с основной системы
 
