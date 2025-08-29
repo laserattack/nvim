@@ -7,6 +7,7 @@
 - Шрифтом терминала надо поставить `JetBrainsMono Nerd Font Regular` ([ссылочка](https://www.nerdfonts.com/font-downloads))
 - Система должна быть `X Window System`
 - Docker
+- Интернет-соединение
 
 ### Установка
 
