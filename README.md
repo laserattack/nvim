@@ -11,32 +11,49 @@
 
 ### Установка
 
-Создание докер-контейнера с рабочим neovim и конфигом
+Создание докер-контейнера с рабочим neovim и конфигом (из директории с репо)
 
 ```
 xhost +local:docker
-docker build -t neovim-config .
+docker build -t nvimd .
 docker builder prune -f
 ```
 ### Удаление 
 
 ```
-docker stop neovim-config
-docker rm neovim-config
-docker rmi neovim-config
+docker rmi nvimd
 docker builder prune -f
 ```
 
-### Работа в nvim через docker
+### Работа в nvim через docker (рекомендуется)
 
-Просто запуск контейнера с nvim и монтированным конфигом
+Надо добавить функцию `nd` (neovim docker) в `~/.bashrc`
 
 ```
-docker run -it --rm --name neovim-config \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v ~/.config/nvim:/root/.config/nvim \
-    -e DISPLAY=$DISPLAY \
-    neovim-config
+nd() {
+    if [ ! $# -eq 0 ]; then
+        [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
+
+        local target_path=$(realpath "$1")
+
+        docker run -it --rm --name nvimd \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            -v ~/.config/nvim:/root/.config/nvim \
+            -v $HOME:/VIRTUAL$HOME \
+            -e DISPLAY=$DISPLAY \
+            -w "/VIRTUAL$(dirname "$target_path")" \
+            nvimd \
+            nvim "/VIRTUAL$target_path"
+    else
+        docker run -it --rm --name nvimd \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            -v ~/.config/nvim:/root/.config/nvim \
+            -v $HOME:/VIRTUAL$HOME \
+            -e DISPLAY=$DISPLAY \
+            -w "/VIRTUAL$HOME" \
+            nvimd
+    fi
+}
 ```
 
 ## Работа с основной системы
