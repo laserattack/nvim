@@ -16,7 +16,6 @@
 Далее из `~/.config/nvim` выполнить
 
 ```
-xhost +local:docker
 docker build -t nvimd .
 docker builder prune -f
 ```
@@ -34,6 +33,7 @@ docker builder prune -f
 
 ```
 nd() {
+    xhost +local:docker >/dev/null 2>&1
     if [ ! $# -eq 0 ]; then
         [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
 
