@@ -1,6 +1,6 @@
 # Мой конфиг neovim
 
-## Работа через Docker
+## Работа через Docker (рекомендуется)
 
 ### Зависимости
 
@@ -28,7 +28,7 @@ docker rmi nvimd
 docker builder prune -f
 ```
 
-### Работа в nvim через docker (рекомендуется)
+### Работа в nvim через docker
 
 Надо добавить функцию `nd` (neovim docker) в `~/.bashrc`
 
