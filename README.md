@@ -11,7 +11,7 @@
 
 ### Установка
 
-Создание докер-контейнера с рабочим neovim и конфигом (из директории с репо)
+Создание докер-контейнера с рабочим neovim и конфигом
 
 ```
 xhost +local:docker
@@ -45,13 +45,16 @@ nd() {
             nvimd \
             nvim "/VIRTUAL$target_path"
     else
+        local current_dir=$(pwd)
+        
         docker run -it --rm --name nvimd \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             -v ~/.config/nvim:/root/.config/nvim \
             -v $HOME:/VIRTUAL$HOME \
             -e DISPLAY=$DISPLAY \
-            -w "/VIRTUAL$HOME" \
-            nvimd
+            -w "/VIRTUAL$current_dir" \
+            nvimd \
+            nvim
     fi
 }
 ```
