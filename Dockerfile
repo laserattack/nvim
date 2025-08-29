@@ -1,4 +1,9 @@
-# docker build -t neovim:v0.11.3 .
+# Сборка и запуск
+## docker build -t neovim:v0.11.3 .
+## docker run -d -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY neovim:v0.11.3
+
+# Для корректной работы xlip на хосте также сделать
+## xhost +local:docker
 
 FROM ubuntu:22.04
 
@@ -8,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     tar \
     git \
+    xclip \
     ripgrep \
     && apt-get clean
 
