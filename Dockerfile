@@ -1,10 +1,3 @@
-# Сборка и запуск
-## docker build -t neovim-config .
-## docker create -it --name neovim-config -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY neovim-config
-
-# Для корректной работы xlip на хосте также сделать
-## xhost +local:docker
-
 FROM ubuntu:22.04
 
 # Установка зависимостей
