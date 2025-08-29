@@ -1,13 +1,13 @@
 # Сборка и запуск
-## docker build -t neovim:v0.11.3 .
-## docker run -d -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY neovim:v0.11.3
+## docker build -t neovim-config .
+## docker create -it --name neovim-config -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY neovim-config
 
 # Для корректной работы xlip на хосте также сделать
 ## xhost +local:docker
 
 FROM ubuntu:22.04
 
-# Установка nvim
+# Установка зависимостей
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
@@ -15,14 +15,34 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     xclip \
     ripgrep \
+    build-essential \
+    cmake \
+    libx11-dev \
+    libxkbfile-dev \
     && apt-get clean
 
 RUN curl -LO https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz \
     && tar -xzf nvim-linux-x86_64.tar.gz -C /usr/local --strip-components=1 \
     && rm nvim-linux-x86_64.tar.gz
+
+RUN curl -LO https://github.com/sergei-mironov/xkb-switch/archive/refs/tags/1.8.5.tar.gz \
+    && tar -xzf 1.8.5.tar.gz \
+    && rm 1.8.5.tar.gz
+
+WORKDIR /xkb-switch-1.8.5
+
+RUN mkdir build && cd build \
+    && cmake .. \
+    && make \
+    && make install
+
+RUN ldconfig
+
+WORKDIR /
+RUN rm -rf /xkb-switch-1.8.5
 #
 
-# Установка конфига
+# Копирование конфига
 COPY . /root/.config/nvim/
 #
 

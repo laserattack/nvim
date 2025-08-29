@@ -1,12 +1,43 @@
 # Мой конфиг neovim
 
+## Работа через Docker
+
+### Зависимости
+
+- Шрифтом терминала надо поставить `JetBrainsMono Nerd Font Regular` ([ссылочка](https://www.nerdfonts.com/font-downloads))
+- Система должна быть `X Window System`
+- Docker
+
+### Установка
+
+Создание докер-контейнера с рабочим neovim и конфигом
+
+```
+xhost +local:docker
+docker build -t neovim-config .
+docker create -it --name neovim-config -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY neovim-config
+docker builder prune -f
+```
+
+### Запуск
+
+Запуск докер-контейнера: `docker start neovim-config`
+
+Зайти в контейнер: `docker attach neovim-config`
+
+Выйти из контейнера без его выключения: `ctrl+p+q`
+
+Выйти из контейнера с его выключением `exit` в терминале контейнера
+
+
+## Работа с основной системы
+
+- Система должна быть `X Window System`
 - Шрифтом терминала надо поставить `JetBrainsMono Nerd Font Regular` ([ссылочка](https://www.nerdfonts.com/font-downloads))
 - Репозиторий склонировать в `~/.config`, должна появиться папка `~/.config/nvim`
 - Все зависимости в папке `deps`, ничего не будет ни откуда скачиваться
 - О том как добавить какой-нибудь Language Server написано в `lua/plugins/lsp.lua`
 - О том как добавить парсер для какого-нибудь языка в tree-sitter (умная подсветка) написано в `lua/plugins/tree-sitter.lua`
-
-### Что должно быть в системе чтобы это работало
 
 #### Утилита типо `xclip` (интерфейс командной строки к буферу обмена X) (есть в apt) 
 
