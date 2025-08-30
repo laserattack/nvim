@@ -31,7 +31,7 @@ docker builder prune -f
 
 Надо добавить код ниже в `~/.bashrc`
 
-```
+```bash
 xhost +local:docker >/dev/null 2>&1
 nd() {
     if [ ! $# -eq 0 ]; then
