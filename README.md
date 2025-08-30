@@ -29,7 +29,7 @@ docker builder prune -f
 
 ### Работа в nvim через docker
 
-Надо добавить функцию `nd` (neovim docker) в `~/.bashrc`
+Надо добавить код ниже в `~/.bashrc`
 
 ```
 xhost +local:docker >/dev/null 2>&1
