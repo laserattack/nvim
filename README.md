@@ -32,37 +32,37 @@ docker builder prune -f
 Надо добавить код ниже в `~/.bashrc`
 
 ```bash
-
 nd() {
     xhost +local:nvimd >/dev/null 2>&1
-    if [ ! $# -eq 0 ]; then
-        [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
+    (
+        if [ ! $# -eq 0 ]; then
+            [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
 
-        local target_path=$(realpath "$1")
+            local target_path=$(realpath "$1")
 
-        docker run -it --rm --name nvimd \
-            -v /tmp/.X11-unix:/tmp/.X11-unix \
-            -v ~/.config/nvim:/root/.config/nvim \
-            -v $HOME:/VIRTUAL$HOME \
-            -e DISPLAY=$DISPLAY \
-            -w "/VIRTUAL$(dirname "$target_path")" \
-            nvimd \
-            nvim "/VIRTUAL$target_path"
-    else
-        local current_dir=$(pwd)
-        
-        docker run -it --rm --name nvimd \
-            -v /tmp/.X11-unix:/tmp/.X11-unix \
-            -v ~/.config/nvim:/root/.config/nvim \
-            -v $HOME:/VIRTUAL$HOME \
-            -e DISPLAY=$DISPLAY \
-            -w "/VIRTUAL$current_dir" \
-            nvimd \
-            nvim
-    fi
+            docker run -it --rm --name nvimd \
+                -v /tmp/.X11-unix:/tmp/.X11-unix \
+                -v ~/.config/nvim:/root/.config/nvim \
+                -v $HOME:/VIRTUAL$HOME \
+                -e DISPLAY=$DISPLAY \
+                -w "/VIRTUAL$(dirname "$target_path")" \
+                nvimd \
+                nvim "/VIRTUAL$target_path"
+        else
+            local current_dir=$(pwd)
+            
+            docker run -it --rm --name nvimd \
+                -v /tmp/.X11-unix:/tmp/.X11-unix \
+                -v ~/.config/nvim:/root/.config/nvim \
+                -v $HOME:/VIRTUAL$HOME \
+                -e DISPLAY=$DISPLAY \
+                -w "/VIRTUAL$current_dir" \
+                nvimd \
+                nvim
+        fi
+    )
     xhost -local:nvimd >/dev/null 2>&1
 }
-
 ```
 
 Далее сделать `source ~/.bashrc` и пользоваться nvim'ом через `nd <PATH>`
