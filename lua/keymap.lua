@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert"
 vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true })
 vim.keymap.set('v', 'p', 'p:let @+=@0<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'cd', ':lcd %:p:h<CR>', { noremap = true, silent = true })
 vim.keymap.set(
     'n', '<leader>w',
     function()
