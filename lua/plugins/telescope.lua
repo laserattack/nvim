@@ -20,7 +20,9 @@ return {
                     previewer = false,
                     -- Ищу через rg, игнорю директорию с зависимостями
                     find_command = {
-                        "rg", "--files", "--glob", "!**/deps/**"
+                        "rg", "--files", "--hidden",
+                        "--glob", "!**/deps/**",
+                        "--glob", "!**/.git/**"
                     },
                 },
                 live_grep = {
@@ -33,7 +35,8 @@ return {
                         "--line-number",
                         "--column",
                         "--smart-case",
-                        "--glob", "!**/deps/**"
+                        "--glob", "!**/deps/**",
+                        "--glob", "!**/.git/**"
                     }
                 }
             },
