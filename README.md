@@ -32,8 +32,9 @@ docker builder prune -f
 Надо добавить код ниже в `~/.bashrc`
 
 ```bash
-xhost +local:docker >/dev/null 2>&1
+
 nd() {
+    xhost +local:nvimd >/dev/null 2>&1
     if [ ! $# -eq 0 ]; then
         [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
 
@@ -59,7 +60,9 @@ nd() {
             nvimd \
             nvim
     fi
+    xhost -local:nvimd >/dev/null 2>&1
 }
+
 ```
 
 Далее сделать `source ~/.bashrc` и пользоваться nvim'ом через `nd <PATH>`
