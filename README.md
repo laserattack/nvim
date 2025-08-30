@@ -40,7 +40,7 @@ nd() {
 
             local target_path=$(realpath "$1")
 
-            docker run -it --rm --name nvimd \
+            docker run -it --rm \
                 -v /tmp/.X11-unix:/tmp/.X11-unix \
                 -v ~/.config/nvim:/root/.config/nvim \
                 -v $HOME:/VIRTUAL$HOME \
@@ -51,7 +51,7 @@ nd() {
         else
             local current_dir=$(pwd)
             
-            docker run -it --rm --name nvimd \
+            docker run -it --rm \
                 -v /tmp/.X11-unix:/tmp/.X11-unix \
                 -v ~/.config/nvim:/root/.config/nvim \
                 -v $HOME:/VIRTUAL$HOME \
