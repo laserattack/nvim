@@ -29,6 +29,7 @@ return {
                     -- Аргументы по умолчанию + игнор директории с зависимостями
                     vimgrep_arguments = {
                         "rg",
+                        "--hidden",
                         "--color=never",
                         "--no-heading",
                         "--with-filename",
