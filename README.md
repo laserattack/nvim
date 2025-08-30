@@ -77,3 +77,8 @@ nd() {
 - xclip: `0.13`
 - xkb-switch: `2.1.0`
 - ripgrep: `14.1.0`
+
+### Бэкап образа
+
+- Сохранение образа на диск `docker save -o nvimd.tar nvimd`
+- Загрузка образа с диска `docker load -i nvimd.tar` 
