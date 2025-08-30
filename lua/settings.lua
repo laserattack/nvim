@@ -1,4 +1,6 @@
 -- Базовые настройки (не относящиеся к плагинам)
+vim.opt.modeline = true
+vim.opt.modelines = 5
 vim.g.mapleader = " "
 -- Тильды (которые вместо номеров в пустых строках) на пробелы заменяю
 vim.opt.fillchars = { eob = " " }
