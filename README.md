@@ -32,8 +32,8 @@ docker builder prune -f
 Надо добавить функцию `nd` (neovim docker) в `~/.bashrc`
 
 ```
+xhost +local:docker >/dev/null 2>&1
 nd() {
-    xhost +local:docker >/dev/null 2>&1
     if [ ! $# -eq 0 ]; then
         [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
 
