@@ -31,9 +31,6 @@ local ls_settings = {
             },
         },
     },
-    zls = {
-        cmd = { CFGP..'/deps/lsp/zls/zls' },
-    },
     clangd = {
         cmd = { CFGP..'/deps/lsp/clangd/bin/clangd' },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
