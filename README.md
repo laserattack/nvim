@@ -37,15 +37,15 @@ nd() {
     (
         if [ ! $# -eq 0 ]; then
             [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
-
             local target_path=$(realpath "$1")
+            local mount_dir=$(dirname "$target_path")
 
             docker run -it --rm \
                 -v /tmp/.X11-unix:/tmp/.X11-unix \
                 -v ~/.config/nvim:/root/.config/nvim \
-                -v $HOME:/VIRTUAL$HOME \
+                -v "$mount_dir:/VIRTUAL$mount_dir" \
                 -e DISPLAY=$DISPLAY \
-                -w "/VIRTUAL$(dirname "$target_path")" \
+                -w "/VIRTUAL$mount_dir" \
                 nvimd \
                 nvim "/VIRTUAL$target_path"
         else
@@ -54,7 +54,7 @@ nd() {
             docker run -it --rm \
                 -v /tmp/.X11-unix:/tmp/.X11-unix \
                 -v ~/.config/nvim:/root/.config/nvim \
-                -v $HOME:/VIRTUAL$HOME \
+                -v "$current_dir:/VIRTUAL$current_dir" \
                 -e DISPLAY=$DISPLAY \
                 -w "/VIRTUAL$current_dir" \
                 nvimd \
