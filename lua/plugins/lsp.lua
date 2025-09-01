@@ -76,7 +76,6 @@ return {
     -- или создается какой то новый файл (из перечисленных расширений)
     event = {
         "BufReadPre *.lua", "BufNewFile *.lua",
-        "BufReadPre *.zig", "BufNewFile *.zig",
         "BufReadPre *.c", "BufNewFile *.c",
         "BufReadPre *.cpp", "BufNewFile *.cpp",
     },
