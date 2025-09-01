@@ -32,7 +32,7 @@ vim.wo.linebreak = true
 -- при скролле на стрелочки на клавиатуре
 vim.opt.scrolloff = 8
 -- Таб = 4 пробела
-vim.opt.expandtab = true
+vim.opt.expandtab = true -- табы -> пробелы
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.smarttab = true
