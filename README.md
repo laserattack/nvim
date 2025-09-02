@@ -32,7 +32,7 @@ docker builder prune -f
 Надо добавить код ниже в `~/.bashrc`
 
 ```bash
-nd() {
+n() {
     xhost +local:nvimd >/dev/null 2>&1
     (
         if [ ! $# -eq 0 ]; then
@@ -67,7 +67,7 @@ nd() {
 
 В докер всегда будет монтироваться конфиг из `~/.config/nvim` и директория открываемого объекта
 
-Далее сделать `source ~/.bashrc` и пользоваться nvim'ом через `nd <PATH>`
+Далее сделать `source ~/.bashrc` и пользоваться nvim'ом через `n <PATH>`
 
 ### Устройство конфига
 
