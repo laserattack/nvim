@@ -1,6 +1,30 @@
 #!/usr/bin/env bash
 
 n() {
+    if [[ "$1" == "--help" ]]; then
+        echo "Usage:"
+        echo "  <nvimd.sh path> [file/dir]    - Open file/directory in nvim"
+        echo "  <nvimd.sh path> --install     - Build nvimd image"
+        echo "  <nvimd.sh path> --uninstall   - Remove nvimd image"
+        echo "  <nvimd.sh path> --help        - Show nvimd help"
+        return 0
+    fi
+
+    if [[ "$1" == "--install" ]]; then
+        echo "Building nvimd image..."
+        local script_dir=$(dirname "$(realpath "$0")")
+        docker build -t nvimd "$script_dir"
+        docker builder prune -f
+        return 0
+    fi
+    
+    if [[ "$1" == "--uninstall" ]]; then
+        echo "Removing nvimd image..."
+        docker rmi nvimd
+        docker builder prune -f
+        return 0
+    fi
+
     if [ ! $# -eq 0 ]; then
         [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
         local target_path=$(realpath "$1")
