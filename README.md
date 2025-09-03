@@ -83,6 +83,12 @@ n() {
 - xkb-switch
 - ripgrep
 
+### Информация о системе в образе
+
+```
+Linux home 6.8.0-71-generic #71-Ubuntu SMP PREEMPT_DYNAMIC Tue Jul 22 16:52:38 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+```
+
 ### Бэкап образа
 
 - Сохранение образа на диск `docker save -o nvimd.tar nvimd`
