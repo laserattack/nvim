@@ -33,35 +33,35 @@ docker builder prune -f
 
 ```bash
 n() {
-    xhost +local:nvimd >/dev/null 2>&1
-    (
-        if [ ! $# -eq 0 ]; then
-            [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
-            local target_path=$(realpath "$1")
-            local mount_dir=$(dirname "$target_path")
+    if [ ! $# -eq 0 ]; then
+        [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
+        local target_path=$(realpath "$1")
+        local mount_dir=$(dirname "$target_path")
 
-            docker run -it --rm \
-                -v /tmp/.X11-unix:/tmp/.X11-unix \
-                -v ~/.config/nvim:/root/.config/nvim \
-                -v "$mount_dir:/VIRTUAL$mount_dir" \
-                -e DISPLAY=$DISPLAY \
-                -w "/VIRTUAL$mount_dir" \
-                nvimd \
-                nvim "/VIRTUAL$target_path"
-        else
-            local current_dir=$(pwd)
-            
-            docker run -it --rm \
-                -v /tmp/.X11-unix:/tmp/.X11-unix \
-                -v ~/.config/nvim:/root/.config/nvim \
-                -v "$current_dir:/VIRTUAL$current_dir" \
-                -e DISPLAY=$DISPLAY \
-                -w "/VIRTUAL$current_dir" \
-                nvimd \
-                nvim
-        fi
-    )
-    xhost -local:nvimd >/dev/null 2>&1
+        docker run -it --rm \
+            --network host \
+            --volume /tmp/.X11-unix:/tmp/.X11-unix \
+            --volume "$HOME/.Xauthority:/root/.Xauthority" \
+            --volume ~/.config/nvim:/root/.config/nvim \
+            --volume "$mount_dir:/VIRTUAL$mount_dir" \
+            --env DISPLAY=$DISPLAY \
+            --workdir "/VIRTUAL$mount_dir" \
+            nvimd \
+            nvim "/VIRTUAL$target_path"
+    else
+        local current_dir=$(pwd)
+        
+        docker run -it --rm \
+            --network host \
+            --volume /tmp/.X11-unix:/tmp/.X11-unix \
+            --volume "$HOME/.Xauthority:/root/.Xauthority" \
+            --volume ~/.config/nvim:/root/.config/nvim \
+            --volume "$current_dir:/VIRTUAL$current_dir" \
+            --env DISPLAY=$DISPLAY \
+            --workdir "/VIRTUAL$current_dir" \
+            nvimd \
+            nvim
+    fi
 }
 ```
 
