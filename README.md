@@ -39,12 +39,12 @@ n() {
         local mount_dir=$(dirname "$target_path")
 
         docker run -it --rm \
-            --network host \
+            --hostname="$(hostname)" \
+            --env DISPLAY=$DISPLAY \
             --volume /tmp/.X11-unix:/tmp/.X11-unix \
             --volume "$HOME/.Xauthority:/root/.Xauthority" \
             --volume ~/.config/nvim:/root/.config/nvim \
             --volume "$mount_dir:/VIRTUAL$mount_dir" \
-            --env DISPLAY=$DISPLAY \
             --workdir "/VIRTUAL$mount_dir" \
             nvimd \
             nvim "/VIRTUAL$target_path"
@@ -52,12 +52,12 @@ n() {
         local current_dir=$(pwd)
         
         docker run -it --rm \
-            --network host \
+            --hostname="$(hostname)" \
+            --env DISPLAY=$DISPLAY \
             --volume /tmp/.X11-unix:/tmp/.X11-unix \
             --volume "$HOME/.Xauthority:/root/.Xauthority" \
             --volume ~/.config/nvim:/root/.config/nvim \
             --volume "$current_dir:/VIRTUAL$current_dir" \
-            --env DISPLAY=$DISPLAY \
             --workdir "/VIRTUAL$current_dir" \
             nvimd \
             nvim
