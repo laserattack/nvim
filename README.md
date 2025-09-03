@@ -40,10 +40,10 @@ n() {
 
         docker run -it --rm \
             --hostname="$(hostname)" \
-            --env DISPLAY=$DISPLAY \
-            --volume /tmp/.X11-unix:/tmp/.X11-unix \
-            --volume "$HOME/.Xauthority:/root/.Xauthority" \
-            --volume ~/.config/nvim:/root/.config/nvim \
+            --env "DISPLAY=$DISPLAY" \
+            --volume "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
+            --volume "${XAUTHORITY:-${HOME}/.Xauthority}:/root/.Xauthority:ro" \
+            --volume "${HOME}/.config/nvim:/root/.config/nvim" \
             --volume "$mount_dir:/VIRTUAL$mount_dir" \
             --workdir "/VIRTUAL$mount_dir" \
             nvimd \
@@ -53,10 +53,10 @@ n() {
         
         docker run -it --rm \
             --hostname="$(hostname)" \
-            --env DISPLAY=$DISPLAY \
-            --volume /tmp/.X11-unix:/tmp/.X11-unix \
-            --volume "$HOME/.Xauthority:/root/.Xauthority" \
-            --volume ~/.config/nvim:/root/.config/nvim \
+            --env "DISPLAY=$DISPLAY" \
+            --volume "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
+            --volume "${XAUTHORITY:-${HOME}/.Xauthority}:/root/.Xauthority:ro" \
+            --volume "${HOME}/.config/nvim:/root/.config/nvim" \
             --volume "$current_dir:/VIRTUAL$current_dir" \
             --workdir "/VIRTUAL$current_dir" \
             nvimd \
