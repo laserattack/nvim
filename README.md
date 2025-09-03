@@ -13,23 +13,15 @@
 
 Репозиторий склонировать в `~/.config`, должна появиться папка `~/.config/nvim`
 
-Далее из `~/.config/nvim` выполнить
-
-```
-docker build -t nvimd .
-docker builder prune -f
-```
-
-### Удаление 
-
-```
-docker rmi nvimd
-docker builder prune -f
-```
-
 ### Работа в nvim через docker
 
-`./nvimd.sh <путь к объекту, открываемому в neovim>`
+```
+Usage:
+  <nvimd.sh path> [file/dir]    - Open file/directory in nvim
+  <nvimd.sh path> --install     - Build nvimd image
+  <nvimd.sh path> --uninstall   - Remove nvimd image
+  <nvimd.sh path> --help        - Show nvimd help
+```
 
 ### Устройство конфига
 
