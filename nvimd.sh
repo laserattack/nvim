@@ -25,6 +25,12 @@ n() {
         return 0
     fi
 
+    if ! docker image inspect nvimd &>/dev/null; then
+        echo "Error: Image 'nvimd' not found!"
+        echo "Run: $(realpath "$0") --install"
+        return 1
+    fi
+
     if [ ! $# -eq 0 ]; then
         [[ -d "$1" ]] || [[ -f "$1" ]] || touch "$1"
         local target_path=$(realpath "$1")
