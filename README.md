@@ -29,7 +29,7 @@ docker builder prune -f
 
 ### Работа в nvim через docker
 
-`<путь к nvimd.sh> <путь к объекту, открываемому в neovim>`
+`./nvimd.sh <путь к объекту, открываемому в neovim>`
 
 ### Устройство конфига
 
