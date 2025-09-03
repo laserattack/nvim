@@ -26,7 +26,7 @@ n() {
     fi
 
     if ! docker image inspect nvimd &>/dev/null; then
-        echo "Error: Image 'nvimd' not found!"
+        echo "Error: nvimd image not found!"
         echo "Run: $(realpath "$0") --install"
         return 1
     fi
