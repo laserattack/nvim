@@ -1,10 +1,15 @@
 -- Базовые настройки (не относящиеся к плагинам)
+-- Отключить стандартный стартовый экран
+
+vim.opt.shortmess:append("sI")
+
+-- модлайн в файлах
 vim.opt.modeline = true
 vim.opt.modelines = 5
-vim.g.mapleader = " "
 
 -- Тильды (которые вместо номеров в пустых строках) на пробелы заменяю
 -- vim.opt.fillchars = { eob = " " }
+
 -- Настройка netrw 
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
