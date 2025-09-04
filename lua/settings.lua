@@ -13,7 +13,7 @@ vim.g.netrw_liststyle = 3
 -- vim.opt.showtabline = 2
 --
 -- слева от номеров строк пустое пространство размером с 1 символ
-vim.opt.signcolumn = "yes"
+-- vim.opt.signcolumn = "yes"
 --
 -- Чтобы не было подвисаний при работе LSP
 vim.opt.updatetime = 300
