@@ -39,6 +39,18 @@ local ls_settings = {
             offsetEncoding = { "utf-16" },
         },
     },
+    zls = {
+        cmd = { CFGP..'/deps/lsp/zig/zls' },
+        filetypes = { "zig", "zon" },
+        settings = {
+            zls = {
+                semantic_tokens = "partial",
+                -- zig уже в PATH, поэтому не указываем zig_exe_path
+                -- enable_build_on_save = true,
+                zig_exe_path = CFGP.."/deps/lsp/zig/zig-x86_64-linux-0.15.1/zig"
+            }
+        }
+    },
 }
 
 -- Функция для проверки наличия серверов
@@ -75,9 +87,8 @@ return {
     -- Плагиз загружается когда либо открывается какой то существующий файл
     -- или создается какой то новый файл (из перечисленных расширений)
     event = {
-        "BufReadPre *.lua", "BufNewFile *.lua",
-        "BufReadPre *.c", "BufNewFile *.c",
-        "BufReadPre *.cpp", "BufNewFile *.cpp",
+        "BufReadPre *.{lua,c,cpp,zig,zon}",
+        "BufNewFile *.{lua,c,cpp,zig,zon}"
     },
     config = function()
         toggle_diagnostics()

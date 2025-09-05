@@ -5,11 +5,8 @@ return {
     -- Добавляешь новый парсер - укажи сюда
     -- расширение файлов, которые он обрабатывает
     event = {
-        "BufReadPre *.lua", "BufNewFile *.lua",
-        "BufReadPre *.zig", "BufNewFile *.zig",
-        "BufReadPre *.c", "BufNewFile *.c",
-        "BufReadPre *.cpp", "BufNewFile *.cpp",
-        "BufReadPre *.py", "BufNewFile *.py",
+        "BufReadPre *.{lua,c,cpp,zig,py}",
+        "BufNewFile *.{lua,c,cpp,zig,py}"
     },
     config = function()
 
