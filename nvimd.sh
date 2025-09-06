@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 n() {
+    local script_dir=$(dirname "$(realpath "$0")")
+    
     if [[ "$1" == "--help" ]]; then
         echo "Usage:"
         echo "  <nvimd.sh path> [file/dir]    - Open file/directory in nvim"
@@ -12,7 +14,6 @@ n() {
 
     if [[ "$1" == "--install" ]]; then
         echo "Building nvimd image..."
-        local script_dir=$(dirname "$(realpath "$0")")
         docker build -t nvimd "$script_dir"
         docker builder prune -f
         return 0
@@ -41,7 +42,7 @@ n() {
             --env "DISPLAY=$DISPLAY" \
             --volume "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
             --volume "${XAUTHORITY:-${HOME}/.Xauthority}:/root/.Xauthority:ro" \
-            --volume "${HOME}/.config/nvim:/root/.config/nvim" \
+            --volume "$script_dir:/root/.config/nvim" \
             --volume "$mount_dir:/VIRTUAL$mount_dir" \
             --workdir "/VIRTUAL$mount_dir" \
             nvimd \
@@ -54,7 +55,7 @@ n() {
             --env "DISPLAY=$DISPLAY" \
             --volume "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
             --volume "${XAUTHORITY:-${HOME}/.Xauthority}:/root/.Xauthority:ro" \
-            --volume "${HOME}/.config/nvim:/root/.config/nvim" \
+            --volume "$script_dir:/root/.config/nvim" \
             --volume "$current_dir:/VIRTUAL$current_dir" \
             --workdir "/VIRTUAL$current_dir" \
             nvimd \
